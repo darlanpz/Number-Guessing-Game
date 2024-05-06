@@ -28,8 +28,7 @@ function getRandonNumber() {
   return parseInt(Math.random() * 100 + 1);
 }
 
-const secretNumber = getRandonNumber();
-
+let secretNumber = getRandonNumber();
 let tries = 0;
 let triesWord = tries > 1 ? 'tentativa' : 'tentativas';
 
@@ -40,7 +39,9 @@ changeText('#guessBtn', 'chutar');
 changeText('#restartBtn', 'recomeçar');
 
 function checkGuess() {
+
   const chosenNumber = document.querySelector('#chosenNumber').value;
+
   tries ++;
 
   if (chosenNumber) {
@@ -66,8 +67,14 @@ function checkGuess() {
 }
 
 function cleanInput() {
+  secretNumber = getRandonNumber();
+
+  tries = 0;
+
   const inputField = document.querySelector('#chosenNumber');
+
   inputField.value = '';
+
   document.querySelector('#guessBtn').removeAttribute('disabled', 'disabled');
   removeMessage();
 }
