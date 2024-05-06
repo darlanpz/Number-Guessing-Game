@@ -19,6 +19,8 @@
 }
 
 body {
+  background-image: url('/assets/pattern.svg');
+  background-repeat: repeat;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,6 +88,12 @@ body {
   opacity: 0.9;
 }
 
+.button__container button:disabled {
+  background-color: var(--background-color);
+  color: var(--input-border-color);
+  border: 1px solid var(--input-border-color);
+}
+
 .primary-button {
   background-color: var(--title-color);
   color: var(--background-color);
@@ -121,4 +129,18 @@ body {
 .info {
   background-color: var(--info-background);
   color: var(--info-color);
+}
+
+@media (max-width: 512px) {
+  .content__container {
+    margin: 0 24px;
+  }
+
+  .hero__content__container {
+    width: 100%;
+  }
+
+  .title__hero__content__container h1 {
+    font-size: 2rem;
+  }
 }

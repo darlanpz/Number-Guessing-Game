@@ -1,44 +1,73 @@
-function guessNumberGame(numbersAmount) {
-  let maxNumber = numbersAmount;
-  let secretNumber = parseInt(Math.random() * maxNumber + 1);
-  let chosenNumber;
-  let tries = 1;
-  let triesWord = tries > 1 ? 'tentativas' : 'tentativa';
-
-  while (chosenNumber != secretNumber) {
-    chosenNumber = prompt(`Escolha um número entre 1 e ${maxNumber}`);
-    if (chosenNumber == secretNumber || chosenNumber == null) {
-      break;
-    } else {
-      if (chosenNumber > maxNumber || chosenNumber < 1) {
-        alert(`🔴 O número precisa estar entre 1 e ${maxNumber}`);
-      } else if (chosenNumber > secretNumber) {
-        alert(`🔵 O número secreto é menor que ${chosenNumber}`);
-      } else {
-        alert(`🔵 O número secreto é maior que ${chosenNumber}`);
-      }
-    }
-    tries ++;
-  }
-
-  if (chosenNumber == secretNumber) {
-    alert(`🟢 Parabéns! Você descobriu o número secreto, ${secretNumber}! Com ${tries} ${triesWord}.`);
-  }
+function changeText(element, content) {
+  const HtmlElement = document.querySelector(element);
+  HtmlElement.innerHTML = content;
 }
 
-const title = document.querySelector('#title');
-const paragraph = document.querySelector('#paragraph');
-const label = document.querySelector('#label');
-const chosenNumber = document.querySelector('#chosenNumber');
-const guessBtn = document.querySelector('#guessBtn');
-const restartBtn = document.querySelector('#restartBtn');
-const message = document.querySelector('#message');
+function setMessage(priority, text) {
+  const HtmlElement =  document.querySelector('#message');
 
-title.innerHTML = 'Advinhe o número';
-paragraph.innerHTML = 'Este é um jogo de advinhação, tente acertar o número secreto com o menor número de tentativas possível.';
-label.innerHTML = 'Escolha um número entre 1 e 100.';
-guessBtn.innerHTML = 'chutar';
-restartBtn.innerHTML = 'recomeçar';
-message.innerHTML = 'Parabéns! Você descobriu o número secreto!';
+  if (HtmlElement.classList.length = 2) {
+    HtmlElement.classList.remove(HtmlElement.classList[1]);
+  }
+  
+  HtmlElement.innerHTML = text;
+  HtmlElement.classList.add(priority);
+}
 
-message.classList.add('success');
+function removeMessage() {
+  const HtmlElement =  document.querySelector('#message');
+
+  if (HtmlElement.classList.length = 2) {
+    HtmlElement.classList.remove(HtmlElement.classList[1]);
+  }
+
+  HtmlElement.innerHTML = '';
+}
+
+function getRandonNumber() {
+  return parseInt(Math.random() * 100 + 1);
+}
+
+const secretNumber = getRandonNumber();
+
+let tries = 0;
+let triesWord = tries > 1 ? 'tentativa' : 'tentativas';
+
+changeText('#title', 'Advinhe o número');
+changeText('#paragraph', 'Este é um jogo de advinhação, tente acertar o número secreto com o menor número de tentativas possível.');
+changeText('#label', 'Escolha um número entre 1 e 100.');
+changeText('#guessBtn', 'chutar');
+changeText('#restartBtn', 'recomeçar');
+
+function checkGuess() {
+  const chosenNumber = document.querySelector('#chosenNumber').value;
+  tries ++;
+
+  if (chosenNumber) {
+
+    if (chosenNumber == secretNumber) { 
+
+      setMessage('success', `Parabéns! Você descobriu o número secreto com ${tries} ${triesWord}.`);
+
+      document.querySelector('#guessBtn').setAttribute('disabled', 'disabled');
+
+    } else if (chosenNumber > secretNumber) {
+
+      setMessage('info', `O número secreto é menor que ${chosenNumber}.`);
+    } else {
+
+      setMessage('info', `O número secreto é maior que ${chosenNumber}.`);
+    }
+  } else {
+
+    setMessage('error', 'O número não pode ser vazio.');
+  }
+
+}
+
+function cleanInput() {
+  const inputField = document.querySelector('#chosenNumber');
+  inputField.value = '';
+  document.querySelector('#guessBtn').removeAttribute('disabled', 'disabled');
+  removeMessage();
+}
