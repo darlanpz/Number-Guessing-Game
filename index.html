@@ -12,12 +12,33 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container__form">
-      <h1>Advinhe um número</h1>
-      <p>Este é um jogo de advinhação</p>
-      <button onclick=guessNumberGame(100)>Iniciar</button>
+
+  <main class="content__container">
+    
+    <div class="hero__content__container">
+
+      <div class="title__hero__content__container">
+        <h1 id="title"></h1>
+        <p id="paragraph"></p>
+      </div>
+
+      <div class="form__hero__content__container">
+        <label id="label" for="chosenNumber"></label>
+        <input id="chosenNumber" type="number" name="chosenNumber" min="1" max="100"/>
+
+        <div class="button__container">
+          <button onclick="checkGuess()" id="guessBtn" class="primary-button"></button>
+          <button onclick="cleanInput()" id="restartBtn" class="secondary-button"></button>
+        </div>
+      </div>
+
+      <span id="message" class="message__hero__content__container"></span>
     </div>
-    <img src="/assets/img.svg" alt="Números 1, 2 e 3">
-  <script src="app.js" defer></script>
+
+    <img src="/assets/img.svg" alt="Números 1,2 e 3">
+
+    <script src="app.js" defer></script>
+
+  </main>  
 </body>
 </html>
