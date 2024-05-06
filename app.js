@@ -25,3 +25,20 @@ function guessNumberGame(numbersAmount) {
     alert(`🟢 Parabéns! Você descobriu o número secreto, ${secretNumber}! Com ${tries} ${triesWord}.`);
   }
 }
+
+const title = document.querySelector('#title');
+const paragraph = document.querySelector('#paragraph');
+const label = document.querySelector('#label');
+const chosenNumber = document.querySelector('#chosenNumber');
+const guessBtn = document.querySelector('#guessBtn');
+const restartBtn = document.querySelector('#restartBtn');
+const message = document.querySelector('#message');
+
+title.innerHTML = 'Advinhe o número';
+paragraph.innerHTML = 'Este é um jogo de advinhação, tente acertar o número secreto com o menor número de tentativas possível.';
+label.innerHTML = 'Escolha um número entre 1 e 100.';
+guessBtn.innerHTML = 'chutar';
+restartBtn.innerHTML = 'recomeçar';
+message.innerHTML = 'Parabéns! Você descobriu o número secreto!';
+
+message.classList.add('success');
