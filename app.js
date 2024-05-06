@@ -7,7 +7,7 @@ function guessNumberGame(numbersAmount) {
 
   while (chosenNumber != secretNumber) {
     chosenNumber = prompt(`Escolha um número entre 1 e ${maxNumber}`);
-    if (chosenNumber == secretNumber) {
+    if (chosenNumber == secretNumber || chosenNumber == null) {
       break;
     } else {
       if (chosenNumber > maxNumber || chosenNumber < 1) {
@@ -20,5 +20,8 @@ function guessNumberGame(numbersAmount) {
     }
     tries ++;
   }
-  alert(`🟢 Parabéns! Você descobriu o número secreto, ${secretNumber}! Com ${tries} ${triesWord}.`);
+
+  if (chosenNumber == secretNumber) {
+    alert(`🟢 Parabéns! Você descobriu o número secreto, ${secretNumber}! Com ${tries} ${triesWord}.`);
+  }
 }
