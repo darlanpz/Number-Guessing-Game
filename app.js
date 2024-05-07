@@ -1,3 +1,9 @@
+let secretNumberList = [];
+let amountOfNumbersToTry = 4;
+let secretNumber = getRandonNumber();
+let tries = 0;
+let triesWord = tries > 1 ? 'tentativa' : 'tentativas';
+
 function changeText(element, content) {
   const HtmlElement = document.querySelector(element);
   HtmlElement.innerHTML = content;
@@ -25,7 +31,22 @@ function removeMessage() {
 }
 
 function getRandonNumber() {
-  return parseInt(Math.random() * 100 + 1);
+
+  let randonNumber = parseInt(Math.random() * amountOfNumbersToTry + 1);
+  let amountOfItensOnList = secretNumberList.length;
+
+  if (amountOfItensOnList == amountOfNumbersToTry) {
+    secretNumberList = [];
+  }
+
+  if (secretNumberList.includes(randonNumber)) {
+    return getRandonNumber();
+
+  } else {
+    secretNumberList.push(randonNumber);
+    console.log(secretNumberList);
+    return randonNumber;
+  }
 }
 
 function checkGuess() {
@@ -69,12 +90,8 @@ function cleanInput() {
   removeMessage();
 }
 
-let secretNumber = getRandonNumber();
-let tries = 0;
-let triesWord = tries > 1 ? 'tentativa' : 'tentativas';
-
 changeText('#title', 'Advinhe o número');
 changeText('#paragraph', 'Este é um jogo de advinhação, tente acertar o número secreto com o menor número de tentativas possível.');
-changeText('#label', 'Escolha um número entre 1 e 100.');
+changeText('#label', `Escolha um número entre 1 e ${amountOfNumbersToTry}.`);
 changeText('#guessBtn', 'chutar');
 changeText('#restartBtn', 'recomeçar');
